@@ -1,5 +1,6 @@
 import pkg from "@slack/bolt";
 import dotenv from "dotenv";
+import axios from "axios";
 
 const { App } = pkg;
 
@@ -16,6 +17,17 @@ app.command("/hello", async ({ command, ack, say }) => {
   await ack();
   await say(`Hello, <@${command.user_name}>`);
   console.log(`command fired`);
+  const data = {
+    userId: command.user_id,
+    userName: command.user_name,
+    message: `Hello, <@${command.user_name}>`,
+  };
+  try {
+    await axios.post(`http://localhost:3200/api/saveData`, data);
+    console.log(`data saved successfully`, data);
+  } catch (e) {
+    console.error(`Error saving data`, e);
+  }
 });
 
 app.command("/say_name", async ({ command, ack, say }) => {
