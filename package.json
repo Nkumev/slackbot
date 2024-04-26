@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "start": "node index.js",
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "start:dev": "nodemon workflow.js"
   },
   "devDependencies": {
     "dotenv": "^16.4.5",
